@@ -6,18 +6,18 @@
       ./hardware-configuration.nix
     ];
 
-  # boot loader
+  # boot loader.
   boot.loader.limine.enable = true;
 
-  # kernel
+  # kernel.
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  # hostname
+
   networking.hostName = "existere"; # Define your hostname.
 
-  # network
+  # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
-  # time zone
+  # Set your time zone.
   time.timeZone = "Europe/Moscow";
   # printer
   services.printing.enable = true;
@@ -45,6 +45,7 @@
     fuzzel
     fastfetch
     waybar
+    noctalia
     spotify
     throne
     steam
@@ -53,10 +54,16 @@
     discord
     telegram-desktop
     curl
+    sbctl
 
   ];
-  # che eto
+  # version
   system.stateVersion = "26.05";
+  # wm
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
   # unfree
   nixpkgs.config.allowUnfree = true;
   # nvidia
@@ -76,6 +83,11 @@
    };
   # flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  #sddm
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
   #throne
   programs.throne = {
     enable = true;
@@ -83,4 +95,7 @@
   };
   #steam
   programs.steam.enable = true;
+  #zsh
+  programs.zsh.enable = true;
+  users.users.adam.shell = pkgs.zsh;
 }
