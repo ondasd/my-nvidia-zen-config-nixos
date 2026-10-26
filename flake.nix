@@ -4,8 +4,12 @@
   inputs = {
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       nixpkgs = inputs.unstable;
       system = "x86_64-linux";
@@ -16,10 +20,17 @@
       formatter = forAllSystems (
         system: nixpkgs.legacyPackages.${system}.nixfmt-tree
       );
-
       nixosConfigurations.existere = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ ./configuration.nix ];
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./configuration.nix
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.adam = import ./home.nix;
+          }
+        ];
         specialArgs = {
           inherit inputs self;
         };
