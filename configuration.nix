@@ -5,19 +5,15 @@
     [
       ./hardware-configuration.nix
     ];
-
-  # boot loader.
+  # boot loader
   boot.loader.limine.enable = true;
-
-  # kernel.
+  # kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  networking.hostName = "existere"; # Define your hostname.
-
-  # Configure network connections interactively with nmcli or nmtui.
+  # hostname
+  networking.hostName = "existere";
+  # network
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
+  # time
   time.timeZone = "Europe/Moscow";
   # printer
   services.printing.enable = true;
@@ -35,8 +31,6 @@
     ];
   };
   # programs
-  programs.firefox.enable = true;
-
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -98,4 +92,6 @@
   #zsh
   programs.zsh.enable = true;
   users.users.adam.shell = pkgs.zsh;
+  # firefox
+  programs.firefox.enable = true;
 }
