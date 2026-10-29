@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # inform
@@ -8,15 +8,12 @@
   # version
   home.stateVersion = "26.05";
   # environment.
-  home.packages = [
+ # home.packages = [
 
-  ];
+ # ];
   home.file = {
   };
-  # Home Manager can also manage your environment variables through
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
+  #
 
   # home-manager install
   programs.home-manager.enable = true;
@@ -24,8 +21,7 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      zapret = "cd zapret-discord-youtube-linux && ./service.sh";
-      update = "sudo nixos-rebuild switch";
+      zapret = "./zapret.sh";                                                                    switch = "./switch.sh";                                                                    config = "./which-config.sh";
     };
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
@@ -34,4 +30,25 @@
       theme = "gentoo";
     };
   };
+  #cursor
+  home.pointerCursor = {
+   enable = true;
+   gtk.enable = true;
+   x11.enable = true;                                                                         package = pkgs.bibata-cursors;                                                             name = "Bibata-CUrsors";
+   size = 20;
+};
+  #lazyvim
+  programs.lazyvim.enable = true;
+  #terminal
+   programs.ghostty = {
+    enable = true;
+
+    settings = {                                                                                 font-family = "JetBrainsMono Nerd Font";                                                   font-size = 12;
+      window-padding-x = 5;
+      window-padding-y = 5;
+      background-opacity = 0.60;
+      shell-integration = "zsh";
+    };
+  };
+
 }
