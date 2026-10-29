@@ -1,9 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
-{
-  imports =
-    [
+{                                                                                            imports =                                                                                    [
       ./hardware-configuration.nix
+      ./disko-config.nix
     ];
   # boot loader
   boot.loader.limine.enable = true;
@@ -13,9 +12,7 @@
   networking.hostName = "existere";
   # network
   networking.networkmanager.enable = true;
-  # time
-  time.timeZone = "Europe/Moscow";
-  # printer
+  # time                                                                                     time.timeZone = "Europe/Moscow";                                                           # printer
   services.printing.enable = true;
   # sound
   services.pipewire = {
@@ -31,15 +28,12 @@
     ];
   };
   # programs
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
+  environment.systemPackages = with pkgs; [                                                    neovim                                                                                     wget
     git
-    alacritty
+    ghostty
     fuzzel
     fastfetch
     waybar
-    noctalia
     spotify
     throne
     steam
@@ -49,6 +43,14 @@
     telegram-desktop
     curl
     sbctl
+    caelestia-shell
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    lutris
+    librewolf
+    vscode
+    adwaita-icon-theme
+    hyfetch
+    chromium
 
   ];
   # version
@@ -64,8 +66,8 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-  open = false;
-  package =
+    open = false;
+    package =
   config.boot.kernelPackages.nvidiaPackages.mkDriver {
     version = "595.99.02";
     sha256_64bit = "sha256-6HR3lYv3YwcFSTJL1a1slI66btIQ5EAFs+/4SUD24ew=";
@@ -74,14 +76,16 @@
     settingsSha256 = "sha256-GYCcnxfKPrTCrsmd25sMyzfC5cqJQJx0c31haooyTYM=";
     persistencedSha256 = "sha256-VyKtF/HdHPQrHHK6opSO69M72LmnGZtauuchj9uuje8=";
     };
-   };
+  };
   # flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  #sddm
-  services.displayManager.sddm = {
+  #display-manager
+  services.xserver.displayManager.lightdm = {
     enable = true;
-    wayland.enable = true;
   };
+  services.xserver.enable = true;
+  #home-manager
+  home-manager.users.adam = import ./home.nix;
   #throne
   programs.throne = {
     enable = true;
@@ -92,6 +96,12 @@
   #zsh
   programs.zsh.enable = true;
   users.users.adam.shell = pkgs.zsh;
-  # firefox
-  programs.firefox.enable = true;
+  #cursor
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "20";
+    HYPRCURSOR_THEME = "Bibata-Modern-Classic";
+    HYPRCURSOR_SIZE = "20";
+  };
+
 }
