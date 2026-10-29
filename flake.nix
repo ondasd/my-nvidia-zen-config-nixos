@@ -6,15 +6,22 @@
     stable.url = "github:nixos/nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unstable";
-    };
+      inputs.nixpkgs.follows = "nixpkgs";
+     };
+     disko.url = "github:nix-community/disko";
+     disko.inputs.nixpkgs.follows = "nixpkgs";
+     noctalia = {
+       url = "github:noctalia-dev/noctalia";
+             inputs.nixpkgs.follows = "nixpkgs";
+     };
+     lazyvim.url = "github:pfassina/lazyvim-nix";
+
   };
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, lazyvim, home-manager, ... }@inputs:
     let
       nixpkgs = inputs.unstable;
       system = "x86_64-linux";
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
+      forAllSystems = nixpkgs.lib.genAttrs;
     in
     {
       formatter = forAllSystems (
@@ -23,17 +30,20 @@
       nixosConfigurations.existere = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.default
           ./configuration.nix
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.adam = import ./home.nix;
-          }
+           inputs.disko.nixosModules.disko
+           inputs.home-manager.nixosModules.home-manager
+           home-manager.nixosModules.home-manager
+  {
+  home-manager.sharedModules = [
+    lazyvim.homeManagerModules.default
+  ];
+}
         ];
-        specialArgs = {
-          inherit inputs self;
-        };
-      };
-    };
+specialArgs = {
+    inherit inputs;
+  };
+};
+};
 }
