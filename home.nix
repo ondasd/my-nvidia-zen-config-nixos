@@ -21,7 +21,9 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      zapret = "./zapret.sh";                                                                    switch = "./switch.sh";                                                                    config = "./which-config.sh";
+      zapret = "./zapret.sh";                                                                
+      switch = "./switch.sh";                                                                  
+      config = "./which-config.sh";
     };
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
@@ -34,7 +36,9 @@
   home.pointerCursor = {
    enable = true;
    gtk.enable = true;
-   x11.enable = true;                                                                         package = pkgs.bibata-cursors;                                                             name = "Bibata-CUrsors";
+   x11.enable = true;                                                                      
+   package = pkgs.bibata-cursors;                                                             
+   name = "Bibata-CUrsors";
    size = 20;
 };
   #lazyvim
@@ -43,7 +47,9 @@
    programs.ghostty = {
     enable = true;
 
-    settings = {                                                                                 font-family = "JetBrainsMono Nerd Font";                                                   font-size = 12;
+    settings = {                                                                             
+      font-family = "JetBrainsMono Nerd Font";                                               
+      font-size = 12;
       window-padding-x = 5;
       window-padding-y = 5;
       background-opacity = 0.60;
