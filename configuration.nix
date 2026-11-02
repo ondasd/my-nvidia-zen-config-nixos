@@ -1,6 +1,8 @@
 { config, lib, pkgs, inputs, ... }:
 
-{                                                                                            imports =                                                                                    [
+{                                        
+    imports =          
+    [
       ./hardware-configuration.nix
       ./disko-config.nix
     ];
@@ -12,7 +14,9 @@
   networking.hostName = "existere";
   # network
   networking.networkmanager.enable = true;
-  # time                                                                                     time.timeZone = "Europe/Moscow";                                                           # printer
+  # time                                                                                   
+  time.timeZone = "Europe/Moscow";       
+  # printer
   services.printing.enable = true;
   # sound
   services.pipewire = {
@@ -28,7 +32,9 @@
     ];
   };
   # programs
-  environment.systemPackages = with pkgs; [                                                    neovim                                                                                     wget
+  environment.systemPackages = with pkgs; [    
+    neovim   
+    wget
     git
     ghostty
     fuzzel
@@ -43,8 +49,8 @@
     #telegram-desktop
     curl
     sbctl
-  #  caelestia-shell
-   # inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    caelestia-shell
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     lutris
     librewolf
     vscode
