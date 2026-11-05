@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo "flake/default :"
-read -p answer
+echo "flake/default?"
+read -p ":" answer
 case "$answer" in 
    default|def|d|D|DEF|DEFAULT)
       sudo nixos-rebuild switch
