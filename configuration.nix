@@ -53,8 +53,8 @@
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     lutris
     librewolf
-    vscode
-    adwaita-icon-theme
+    zed-editor
+    bibata-cursors
     hyfetch
     chromium
 
