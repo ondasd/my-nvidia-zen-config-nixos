@@ -23,7 +23,7 @@
     shellAliases = {
       zapret = "./zapret.sh";                                                                
       switch = "./switch.sh";                                                                  
-      config = "./which-config.sh";
+      config = "./config.sh";
     };
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
