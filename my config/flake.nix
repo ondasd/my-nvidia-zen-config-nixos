@@ -4,13 +4,13 @@
   inputs = {
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-26.05";
-   # home-manager = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
      };
      disko.url = "github:nix-community/disko";
      disko.inputs.nixpkgs.follows = "nixpkgs";
-     #noctalia = {
+     noctalia = {
        url = "github:noctalia-dev/noctalia";
              inputs.nixpkgs.follows = "nixpkgs";
      };
