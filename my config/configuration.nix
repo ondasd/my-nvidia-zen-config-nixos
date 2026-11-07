@@ -55,7 +55,6 @@
     librewolf
     zed-editor
     bibata-cursors
-    hyfetch
     chromium
 
   ];
